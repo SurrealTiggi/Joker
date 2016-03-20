@@ -22,7 +22,6 @@ public class MainActivityFragment extends Fragment {
     private static final String TAG = MainActivityFragment.class.getSimpleName();
 
     Button mPush;
-    ProgressBar mProgressBar;
 
     public MainActivityFragment() {
     }
@@ -37,31 +36,14 @@ public class MainActivityFragment extends Fragment {
         AdView mAdView = (AdView) mView.findViewById(R.id.adView);
 
         mPush = (Button) mView.findViewById(R.id.button_getJoke);
-        mProgressBar = (ProgressBar) mView.findViewById(R.id.progress_bar);
-        mProgressBar.setVisibility(View.INVISIBLE);
 
         // Create an ad request. Check logcat output for the hashed device ID to
         // get test ads on a physical device. e.g.
         // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
         AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(com.google.android.gms.ads.AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
         mAdView.loadAd(adRequest);
         return mView;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        //toggleVisibility();
-    }
-
-    public void toggleVisibility() {
-        if (mProgressBar.getVisibility() == View.INVISIBLE) {
-            mProgressBar.setVisibility(View.VISIBLE);
-        }
-        else {
-            mProgressBar.setVisibility(View.INVISIBLE);
-        }
     }
 }

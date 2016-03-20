@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.JokeClass;
@@ -16,6 +17,7 @@ import baptista.tiago.joker.tasks.FetchJokeTask;
 public class MainActivity extends AppCompatActivity implements OnJokeTaskCompleted {
 
     private final static String TAG = MainActivity.class.getSimpleName();
+    ProgressBar mProgressBar;
 
 
     @Override
@@ -23,7 +25,17 @@ public class MainActivity extends AppCompatActivity implements OnJokeTaskComplet
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate()");
+
+        mProgressBar = (ProgressBar) this.findViewById(R.id.progress_bar);
+        mProgressBar.setVisibility(View.INVISIBLE);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mProgressBar.setVisibility(View.INVISIBLE);
+    }
+
 
     // REDUNDANT -- Fetch joke from java library
     public void tellJoke(View view) {
@@ -43,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements OnJokeTaskComplet
     // Fetch joke from AsyncTask and only launch activity when done
     public void fetchJokeActivity(View view) {
         new FetchJokeTask(this).execute("https://udacity-3-1252.appspot.com/_ah/api/");
+        mProgressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
