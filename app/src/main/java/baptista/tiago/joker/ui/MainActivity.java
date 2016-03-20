@@ -1,11 +1,9 @@
 package baptista.tiago.joker.ui;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.util.Pair;
 import android.view.View;
 import android.widget.Toast;
 
@@ -13,7 +11,7 @@ import com.example.JokeClass;
 import baptista.tiago.androidjokelib.JokeActivity;
 import baptista.tiago.joker.R;
 import baptista.tiago.joker.interfaces.OnJokeTaskCompleted;
-import baptista.tiago.joker.tasks.fetchJokeTask;
+import baptista.tiago.joker.tasks.FetchJokeTask;
 
 public class MainActivity extends AppCompatActivity implements OnJokeTaskCompleted {
 
@@ -44,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements OnJokeTaskComplet
 
     // Fetch joke from AsyncTask and only launch activity when done
     public void fetchJokeActivity(View view) {
-        new fetchJokeTask(this).execute("https://udacity-3-1252.appspot.com/_ah/api/");
+        new FetchJokeTask(this).execute("https://udacity-3-1252.appspot.com/_ah/api/");
     }
 
     @Override
